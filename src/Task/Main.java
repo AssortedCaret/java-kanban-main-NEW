@@ -1,6 +1,8 @@
 package Task;
 
-import Task.Task;
+import History.HistoryManager;
+import TaskManager.InMemoryTaskManager;
+import UtilManager.Managers;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,9 +40,15 @@ public class Main {
         System.out.println(inMemoryTaskManager.getSubTaskMap());
 
         //проверка истории
-        inMemoryTaskManager.getEpicForID(3);
-        inMemoryTaskManager.getTaskForID(1);
-        inMemoryTaskManager.getTaskForID(2);
-        System.out.println(inMemoryTaskManager.getHistory());
+        /*Насколько понял, теперь мы вызываем методы объектов через класс Manager, и нам теперь не нужно хранить
+        * истрию в классе InMemoryTaskManager - оттуда убираем всё, что с историей связано. Для истории используется
+        * только класс InMemoryHistoryManager, и работать с ним, как сделал ниже*/
+
+        HistoryManager managers = Managers.getDefaultHistory();
+        managers.add(newFirstSubTask);
+        managers.add(secondTask);
+        System.out.println(managers.getHistory());
+
+
     }
 }

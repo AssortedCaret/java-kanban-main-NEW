@@ -1,5 +1,6 @@
-package Task;
+package TaskManager;
 
+import Task.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +26,4 @@ public interface TaskManager {
     List<SubTask> getSubTaskEpic(Epic epic);
     Integer getID();
     void updateEpicStatus(Integer epicId);
-    String getHistory();
 }

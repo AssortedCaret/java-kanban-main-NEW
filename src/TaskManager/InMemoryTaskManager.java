@@ -1,17 +1,14 @@
-package Task;
+package TaskManager;
 
-import Task.SubTask;
-import Task.Task;
-
+import Task.*;
 import java.util.*;
 
-public class InMemoryTaskManager implements TaskManager, HistoryManager {
+public class InMemoryTaskManager implements TaskManager {
 
     private final HashMap<Integer, Task> taskMap = new HashMap<>();
     private final HashMap<Integer, Epic> epicMap = new HashMap<>();
     private final HashMap<Integer, SubTask> subTaskMap = new HashMap<>();
     private Integer ID = 0;
-    static ArrayList<Integer> historyList = new ArrayList<>(); // для хранения истории
 
     // получение списка всех задач
     @Override
@@ -59,21 +56,18 @@ public class InMemoryTaskManager implements TaskManager, HistoryManager {
     // получение объектов по идентификатору
     public Task getTaskForID(Integer number){
         Task newTask = taskMap.get(number);
-        historyList.add(0, number); //добавляем идентификатор в список истории
         return newTask;
     }
 
     @Override
     public Epic getEpicForID(Integer number){
         Epic newEpic = epicMap.get(number);
-        historyList.add(0, number);
         return newEpic;
     }
 
     @Override
     public SubTask getSubTaskForID(Integer number){
         SubTask newSubTask = subTaskMap.get(number);
-        historyList.add(0, number);
         return newSubTask;
     }
 
@@ -199,23 +193,6 @@ public class InMemoryTaskManager implements TaskManager, HistoryManager {
             epic.setStatus(String.valueOf(StatusEpic.DONE));
         else
             epic.setStatus(String.valueOf(StatusEpic.IN_PROGRESS));
-    }
-
-    @Override
-    public void add(Task task) {
-
-    }
-
-    @Override
-    public String getHistory(){
-        Integer [] mass = new Integer[10];
-        for(int i = 0; i < historyList.size(); i++) {
-            if (i == 10)
-                break;
-            else
-                mass[i] = historyList.get(i);
-        }
-        return Arrays.toString(mass);
     }
 
 }
